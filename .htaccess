@@ -1,0 +1,23 @@
+# ----------------------------------------------------------------------
+# Apache / LiteSpeed configuration for Hostinger
+# Supports clean URLs (extensionless HTML) and routing
+# ----------------------------------------------------------------------
+
+RewriteEngine On
+
+# 1. If physical file or folder exists, serve directly (CSS, JS, images, etc.)
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# 2. Redirect unexported subpages to parent pages instead of 404
+RewriteRule ^service/.*$ /services [R=302,L]
+RewriteRule ^work/.*$ /work [R=302,L]
+RewriteRule ^privacy/?$ / [R=302,L]
+
+# 3. Rewrite clean URLs to their corresponding .html files
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^([^\.]+)$ $1.html [NC,L]
+
+# 4. Fallback 404 error page
+ErrorDocument 404 /index.html

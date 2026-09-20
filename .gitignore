@@ -1,0 +1,10 @@
+# Browser preview cache & profiles
+.preview/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Scratch and logs
+*.log
